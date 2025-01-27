@@ -2,6 +2,9 @@
 	"folders": [
 		{
 			"path": "rappels-java"
+		},
+		{
+			"path": "exo-bitwise-boolean"
 		}
 	],
 	"settings": {

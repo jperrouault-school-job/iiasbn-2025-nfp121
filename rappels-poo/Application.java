@@ -1,4 +1,5 @@
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 public class Application {
@@ -8,26 +9,47 @@ public class Application {
         // Vehicule[] vehicules = new Vehicule[2];
         List<Vehicule> vehicules = new ArrayList<>();
 
-        v1.demarrer();
-        v2.demarrer();
+        // v1.demarrer();
+        // v2.demarrer();
 
         // vehicules[0] = v1;
         // vehicules[1] = v2;
         vehicules.add(v1);
         vehicules.add(v2);
+        // cChelou(vehicules); // Compile mais devient incohérent !
 
-        
+        // for
+        // for (int i = 0; i < vehicules.size(); i++) {
+        //     Vehicule v = vehicules.get(i);
+        // }
+
+        // foreach
+        for (Vehicule v : vehicules) {
+            v.demarrer();
+            vehicules.remove(v);
+        }
+
+        // Pattern Iterator
+        Iterator<Vehicule> it = vehicules.iterator();
+        while (it.hasNext()) {
+            Vehicule v = it.next();
+            v.demarrer();
+            it.remove();
+        }
+
+        System.out.println("--------");
+        System.exit(0);
 
 
         // vehicules.add("test");
-        cChelou(vehicules);
+        // cChelou(vehicules);
 
         // vehicules[0].demarrer();
         // vehicules[1].demarrer();
 
-        vehicules.get(0).demarrer();
-        vehicules.get(1).demarrer();
-        vehicules.get(2).demarrer();
+        // vehicules.get(0).demarrer();
+        // vehicules.get(1).demarrer();
+        // vehicules.get(2).demarrer();
     }
 
     public static void cChelou(List list) {

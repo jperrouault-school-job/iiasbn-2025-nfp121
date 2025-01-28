@@ -27,7 +27,10 @@ public class Application {
         for (Vehicule v : vehicules) {
             v.demarrer();
             vehicules.remove(v);
+            System.out.println("SUPPRIME ?");
         }
+
+        System.out.println("--??");
 
         // Pattern Iterator
         Iterator<Vehicule> it = vehicules.iterator();

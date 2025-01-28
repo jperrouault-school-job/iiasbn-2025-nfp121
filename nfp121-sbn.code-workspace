@@ -23,6 +23,12 @@
 		},
 		{
 			"path": "exo-exception"
+		},
+		{
+			"path": "exo-file-copy"
+		},
+		{
+			"path": "exo-http-image"
 		}
 	],
 	"settings": {

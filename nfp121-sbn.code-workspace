@@ -20,6 +20,9 @@
 		},
 		{
 			"path": "demo-builder"
+		},
+		{
+			"path": "exo-exception"
 		}
 	],
 	"settings": {

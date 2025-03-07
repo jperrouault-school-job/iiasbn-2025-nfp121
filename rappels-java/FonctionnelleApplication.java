@@ -9,12 +9,16 @@ public class FonctionnelleApplication {
 
         prenoms.stream()
             // Filtrer les prénoms qui commencent par "J"
-
+            .filter(prenom -> prenom.startsWith("J"))
 
             // Mettre tout en MAJUSCULE les prénoms
+            // .map(prenom -> prenom.toUpperCase())
+            .map(String::toUpperCase)
 
             // Afficher chaque prénom dans la console
-            ;
+            // .forEach(prenom -> System.out.println(prenom))
+            .forEach(System.out::println)
+        ;
 
         System.exit(0);
 

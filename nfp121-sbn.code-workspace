@@ -29,6 +29,15 @@
 		},
 		{
 			"path": "exo-http-image"
+		},
+		{
+			"path": "exo-json"
+		},
+		{
+			"path": "exo-json-http"
+		},
+		{
+			"path": "tp-http-proxy"
 		}
 	],
 	"settings": {

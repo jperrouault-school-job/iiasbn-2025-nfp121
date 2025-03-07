@@ -1,12 +1,20 @@
 import java.util.List;
 import java.util.function.BiFunction;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 public class FonctionnelleApplication {
     public static void main(String[] args) {
         List<String> prenoms = List.of("Jérémy", "Gabriel", "Basile", "Jules", "Tristan");
 
-        
+        prenoms.stream()
+            // Filtrer les prénoms qui commencent par "J"
 
+
+            // Mettre tout en MAJUSCULE les prénoms
+
+            // Afficher chaque prénom dans la console
+            ;
 
         System.exit(0);
 

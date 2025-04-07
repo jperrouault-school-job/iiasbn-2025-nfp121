@@ -12,6 +12,11 @@ public class SocketServerApplication {
             Socket client = server.accept();
 
             System.out.println("Une nouvelle connexion est arrivée !!");
+
+            for (int i = 65; i < 97; i++) {
+                client.getOutputStream().write(i);
+                Thread.sleep(1000);
+            }
         }
 
         catch (Exception e) {

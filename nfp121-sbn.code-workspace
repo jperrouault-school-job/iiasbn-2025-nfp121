@@ -38,6 +38,15 @@
 		},
 		{
 			"path": "tp-http-proxy"
+		},
+		{
+			"path": "exo-socket-file-copy"
+		},
+		{
+			"path": "exo-thread-socket-server-file-copy"
+		},
+		{
+			"path": "demo-unit"
 		}
 	],
 	"settings": {

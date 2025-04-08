@@ -56,6 +56,9 @@
 		},
 		{
 			"path": "tp-interpretor-client"
+		},
+		{
+			"path": "exo-bean-factory"
 		}
 	],
 	"settings": {

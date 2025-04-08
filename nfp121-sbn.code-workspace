@@ -47,6 +47,15 @@
 		},
 		{
 			"path": "demo-unit"
+		},
+		{
+			"path": "tp-thread-proxy"
+		},
+		{
+			"path": "tp-interpretor-server"
+		},
+		{
+			"path": "tp-interpretor-client"
 		}
 	],
 	"settings": {

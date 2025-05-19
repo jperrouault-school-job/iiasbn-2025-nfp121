@@ -24,6 +24,8 @@ public class PhotoService {
     private ObjectMapper mapper;
 
     public List<Photo> findAll() {
+        List<Photo> result = new ArrayList<>();
+
         try {
             HttpRequest request = HttpRequest
                 .newBuilder(new URI("https://jsonplaceholder.typicode.com/photos"))
@@ -45,6 +47,6 @@ public class PhotoService {
             System.out.println("Ca marche po");
         }
 
-        return new ArrayList<>();
+        return result;
     }
 }

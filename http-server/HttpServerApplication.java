@@ -1,4 +1,6 @@
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -10,7 +12,19 @@ public class HttpServerApplication {
         while (true) {
             Socket client = server.accept();
 
+            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
+
             System.out.println("Nouvelle connexion HTTP héhé");
+
+            String line = reader.readLine();
+
+            if (line != null) {
+                System.out.println(line);
+
+                String path = line.split(" ")[1];
+                System.out.println("Le chemin demandé est " + path);
+            }
 
             String responseBody = """
 <html>
@@ -26,8 +40,6 @@ public class HttpServerApplication {
             responseBuilder.append("Content-Length: " + responseBody.length() + "\n\r");
             responseBuilder.append("\n\r");
             responseBuilder.append(responseBody);
-
-            BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(client.getOutputStream()));
 
             writer.write(responseBuilder.toString());
             writer.flush();

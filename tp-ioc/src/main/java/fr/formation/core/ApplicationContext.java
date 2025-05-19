@@ -4,12 +4,15 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import fr.formation.annotation.Bean;
 import fr.formation.annotation.Component;
+import fr.formation.annotation.Configuration;
 import fr.formation.annotation.Inject;
 import lombok.extern.log4j.Log4j2;
 
@@ -32,6 +35,27 @@ public class ApplicationContext {
                 // On demander à créer l'instance, puis on l'ajoute au gestionnaire d'instances
                 this.addBean(clz, BeanFactory.createBean(clz));
             }
+
+            else if (clz.isAnnotationPresent(Configuration.class)) {
+                log.debug("Création de la configuration {} ...", clz.getName());
+
+                // On demander à créer l'instance, puis on l'ajoute au gestionnaire d'instances
+                Object config = this.addBean(clz, BeanFactory.createBean(clz));
+
+                // Parcours des méthodes à la recherche de @Bean
+                for (Method m : clz.getDeclaredMethods()) {
+                    if (m.isAnnotationPresent(Bean.class)) {
+                        log.debug("Exécution de la méthode {} ...", m.getName());
+                        try {
+                            this.addBean(m.getReturnType(), m.invoke(config));
+                        }
+
+                        catch (Exception e) {
+                            log.error("Impossible d'exécuter la méthode : {}", e.getMessage());
+                        }
+                    }
+                }
+            }
         }
 
         // Injection des dépendances après toutes les constructions
@@ -46,8 +70,10 @@ public class ApplicationContext {
         return (T)this.instances.get(clz);
     }
 
-    public void addBean(Class<?> clz, Object instance) {
+    public Object addBean(Class<?> clz, Object instance) {
         this.instances.put(clz, instance);
+
+        return instance;
     }
 
     private Set<Class<?>> findAllClassesByPackage(String packageName) {

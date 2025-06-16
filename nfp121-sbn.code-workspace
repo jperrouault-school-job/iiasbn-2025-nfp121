@@ -59,6 +59,15 @@
 		},
 		{
 			"path": "exo-bean-factory"
+		},
+		{
+			"path": "tp-ioc"
+		},
+		{
+			"path": "http-server"
+		},
+		{
+			"path": "tp-ioc-web"
 		}
 	],
 	"settings": {

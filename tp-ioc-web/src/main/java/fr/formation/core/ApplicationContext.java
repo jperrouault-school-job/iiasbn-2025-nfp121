@@ -9,17 +9,23 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.TimeUnit;
 
 import fr.formation.annotation.Bean;
 import fr.formation.annotation.Component;
 import fr.formation.annotation.Configuration;
 import fr.formation.annotation.Controller;
 import fr.formation.annotation.Inject;
+import fr.formation.annotation.Scheduled;
 import lombok.extern.log4j.Log4j2;
 
 @Log4j2
 public class ApplicationContext {
     protected Map<Class<?>, Object> instances = new HashMap<>();
+    private final ScheduledExecutorService scheduler = Executors.newScheduledThreadPool(100);
 
     public ApplicationContext(String packageName) {
         // Auto-référence
@@ -64,6 +70,46 @@ public class ApplicationContext {
         
         for (Map.Entry<Class<?>, Object> instanceEntry : this.instances.entrySet()) {
             this.inject(instanceEntry.getKey(), instanceEntry.getValue());
+        }
+
+        // Schedulers
+        for (Class<?> clz : classes) {
+            for (Method method : clz.getDeclaredMethods()) {
+                Scheduled scheduled = method.getAnnotation(Scheduled.class);
+
+                if (scheduled == null) {
+                    continue;
+                }
+
+                Object instance = this.instances.get(clz);
+
+                scheduler.scheduleAtFixedRate(() -> {
+                    try {
+                        method.invoke(instance);
+                    }
+    
+                    catch (Exception e) {
+                        System.out.println("Ooops");
+                    }
+                }, 0, scheduled.delay(), TimeUnit.MILLISECONDS)
+                ;
+
+                // Thread t1 = new Thread(() -> {
+                //     try {
+                //         while (true) {
+                //             method.invoke(instance);
+                //             Thread.sleep(scheduled.delay());
+                //         }
+                //     }
+    
+                //     catch (Exception e) {
+                //         System.out.println("Ooops");
+                //     }
+                // });
+
+                // t1.start();
+                // t1.interrupt();
+            }
         }
     }
 

@@ -68,6 +68,12 @@
 		},
 		{
 			"path": "tp-ioc-web"
+		},
+		{
+			"path": "tp-ioc-web-visitor"
+		},
+		{
+			"path": "tp-ioc-web-chain-of-resp"
 		}
 	],
 	"settings": {

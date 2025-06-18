@@ -3,7 +3,7 @@ package fr.formation.chainofresp;
 import fr.formation.http.HttpRequest;
 import fr.formation.http.HttpResponse;
 
-public class AbstractFilter {
+public abstract class AbstractFilter {
     protected AbstractFilter next = null;
 
 	public void doChain(HttpRequest request, HttpResponse response) {

@@ -80,7 +80,9 @@ public class HttpAcceptFilter extends AbstractFilter {
         else if (accept.equals("text/html")) {
             response.setContentType(HttpContentType.TEXT_HTML);
         }
-        
+
         response.setContent(sb.toString());
+
+        super.doChain(request, response);
     }
 }

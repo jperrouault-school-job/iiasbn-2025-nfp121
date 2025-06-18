@@ -10,6 +10,7 @@ import java.nio.charset.StandardCharsets;
 
 import fr.formation.annotation.Component;
 import fr.formation.annotation.Inject;
+import fr.formation.chainofresp.AbstractFilter;
 import fr.formation.chainofresp.HttpAcceptFilter;
 import fr.formation.chainofresp.HttpAuthorizationFilter;
 import fr.formation.core.WebApplicationContext;
